@@ -7,11 +7,11 @@ OutFile "RespaldoDiario-Instalador.exe"
 InstallDir "$PROGRAMFILES64\RespaldoDiario"
 RequestExecutionLevel admin
 SetCompressor /SOLID lzma
-VIProductVersion "1.0.0.0"
+VIProductVersion "1.1.0.0"
 VIAddVersionKey "ProductName" "Respaldo Diario"
 VIAddVersionKey "FileDescription" "Instalador de Respaldo Diario"
-VIAddVersionKey "FileVersion" "1.0.0.0"
-VIAddVersionKey "ProductVersion" "1.0.0.0"
+VIAddVersionKey "FileVersion" "1.1.0.0"
+VIAddVersionKey "ProductVersion" "1.1.0.0"
 VIAddVersionKey "LegalCopyright" ""
 
 !define MUI_ABORTWARNING
@@ -37,7 +37,7 @@ Section "Instalar"
   CreateShortcut "$DESKTOP\Respaldo Diario.lnk" "$INSTDIR\RespaldoDiario.exe"
 
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\RespaldoDiario" "DisplayName" "Respaldo Diario"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\RespaldoDiario" "DisplayVersion" "1.0.0"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\RespaldoDiario" "DisplayVersion" "1.1.0"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\RespaldoDiario" "DisplayIcon" "$INSTDIR\RespaldoDiario.exe"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\RespaldoDiario" "UninstallString" '"$INSTDIR\Desinstalar.exe"'
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\RespaldoDiario" "NoModify" 1
@@ -46,6 +46,7 @@ SectionEnd
 
 Section "Uninstall"
   nsExec::Exec 'schtasks.exe /delete /f /tn RespaldoDiario'
+  nsExec::Exec 'schtasks.exe /delete /f /tn RespaldoDiario-Depuracion'
   Delete "$INSTDIR\RespaldoDiario.exe"
   Delete "$INSTDIR\Desinstalar.exe"
   RMDir "$INSTDIR"
